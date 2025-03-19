@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Portfolio</title>
+    <style>
+        /* Reset basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #1d1f21;
+            color: #f5f5f5;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        
+        /* Hero Section */
+        #hero {
+            background: url('https://via.placeholder.com/1600x900/2c3e50/34495e?text=Dark+Hero+Section') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, rgb(0, 50, 125), rgb(89, 143, 188));
+            text-align: center;
+            transition: background 0.5s ease;
+        }
+
+        #hero h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        #hero p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80%;
+            margin-left: 120px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        nav a {
+            color: #f5f5f5;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #e74c3c;
+            transition: color 0.3s ease;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            margin: 50px 0;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.8em;
+            color: #f5f5f5;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Skills Section */
+        .skills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .skills .skill {
+            background: #2c3e50;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            width: 150px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skills .skill:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .skills .skill img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        .skills .skill h3 {
+            font-size: 1.3em;
+            color: #e74c3c;
+        }
+
+        .skills .skill p {
+            font-size: 1em;
+            color: #bdc3c7;
+        }
+
+        /* Projects */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .projects .project {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .projects .project img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.4s ease;
+        }
+
+        .projects .project:hover img {
+            transform: scale(1.1);
+        }
+
+        .projects .project .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .projects .project:hover .overlay {
+            opacity: 1;
+        }
+
+        .projects .project .overlay h3 {
+            font-size: 1.8em;
+            color: #e74c3c;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(to right, #004b88, #4c80c4);
+            padding: 60px 20px;
+            color: white;
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            color: #c1c1c1;
+        }
+
+        #contact p {
+            font-size: 1.2em;
+            color: #bdc3c7;
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(to right, #001b45, #002c9a);
+            box-shadow: 3px 6px 8px rgba(183, 215, 238, 0.806);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 1.1em;
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background: #34495e;
+            color: #f5f5f5;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            background: #2c3e50;
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(to right, #986000, #ee9127);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        .social-links {
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.3em;
+        }
+
+        .social-links a:hover {
+            color: #e74c3c;
+        }
+
+        .social-links-footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .social-links-footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.3em;
+        }
+
+        .social-links-footer a:hover {
+            color: #e74c3c;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .skills {
+                flex-direction: column;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                width: 90%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Let's create something beautiful together.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hi, I’m Lloyd Winston Pinto, a passionate web developer specializing in front-end development. I focus on creating modern, responsive, and user-friendly web experiences that captivate and engage. Beyond coding, I’m also a hobbyist photographer, capturing the emotions and raw beauty of life through my lens. Whether it’s through pixels or photographs, I strive to tell stories that connect with people on a deeper level. I truly love what I do, blending creativity and technology to craft memorable digital experiences and moments that last a lifetime. My work is my passion, and it’s what drives me forward every day.</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>My Skills</h2>
+        <div class="skills">
+            <div class="skill">
+                <img src="https://via.placeholder.com/80" alt="HTML">
+                <h3>HTML</h3>
+                <p>Markup Language</p>
+            </div>
+            <div class="skill">
+                <img src="https://via.placeholder.com/80" alt="CSS">
+                <h3>CSS</h3>
+                <p>Styling Webpages</p>
+            </div>
+            <div class="skill">
+                <img src="https://via.placeholder.com/80" alt="JavaScript">
+                <h3>JavaScript</h3>
+                <p>Interactive Web</p>
+            </div>
+            <div class="skill">
+                <img src="https://via.placeholder.com/80" alt="React">
+                <h3>React</h3>
+                <p>UI Library</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="projects">
+            <div class="project">
+                <img src="https://via.placeholder.com/600x400" alt="Project 1">
+                <div class="overlay">
+                    <h3>Project 1</h3>
+                </div>
+            </div>
+            <div class="project">
+                <img src="https://via.placeholder.com/600x400" alt="Project 2">
+                <div class="overlay">
+                    <h3>Project 2</h3>
+                </div>
+            </div>
+            <div class="project">
+                <img src="https://via.placeholder.com/600x400" alt="Project 3">
+                <div class="overlay">
+                    <h3>Project 3</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>If you have any questions or would like to get in touch, please feel free to reach out to me through the form below or via my social media links.</p>
+        
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+        
+                <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 My Portfolio</p>
+            <div class="social-links-footer">
+              <p>Alternatively, you can reach me on the following platforms:</p>
+                <a href="mailto:someone@example.com">Email</a>
+                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+        </footer>
+    </section>
+
+    <script>
+        // JavaScript for smooth transitions
+        window.addEventListener('scroll', function () {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
