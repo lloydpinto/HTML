@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lloyd Pinto — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f1b;
+      --fg: #ffffff;
+      --accent: #ff00cc;
+      --secondary: #00eaff;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    body.light {
+      --bg: #f3f4f6;
+      --fg: #111;
+      --accent: #0077ff;
+      --secondary: #00bcd4;
+      --glass: rgba(0, 0, 0, 0.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
+      position: relative;
+    }
+
+    canvas {
+      position: fixed;
+      z-index: -1;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    header {
+      text-align: center;
+      padding: 6rem 2rem 2rem;
+    }
+
+    .intro {
+      font-size: 3rem;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent);
+    }
+
+    .role {
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      color: var(--secondary);
+      border-right: 2px solid var(--secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blink 1s step-end infinite;
+      height: 1.5rem;
+    }
+
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--fg);
+      font-family: 'Orbitron', sans-serif;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 5px var(--accent);
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 4rem 2rem;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 3rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat h3 {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background: #1d1d2e;
+      color: var(--fg);
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .contact-form button {
+      padding: 0.75rem 2rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 99;
+    }
+  </style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+<button id="backToTop" onclick="scrollToTop()">↑</button>
+
+<header>
+  <div class="intro">Hello, I'm Lloyd Pinto</div>
+  <div class="role" id="typed-role"></div>
+</header>
+
+<nav>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>OCR Analyzer</h3>
+      <p>Extract text from images & PDFs using Python, Tesseract, and Flask.</p>
+    </div>
+    <div class="card">
+      <h3>Cyber UI</h3>
+      <p>Futuristic UI layout with neon-glow and glassmorphism effects.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="grid">
+    <div class="card"><h3>Python</h3><p>Automation, Flask, OCR</p></div>
+    <div class="card"><h3>JavaScript</h3><p>Animations, Interactivity</p></div>
+    <div class="card"><h3>UI Design</h3><p>HTML/CSS, Cyberpunk Design</p></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><h3 id="projectsCount">0</h3><p>Projects</p></div>
+    <div class="stat"><h3 id="clientsCount">0</h3><p>Clients</p></div>
+    <div class="stat"><h3 id="yearsCount">0</h3><p>Years Exp</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <form class="contact-form">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea rows="4" placeholder="Your Message" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Lloyd Pinto. Designed with futuristic vibes.
+</footer>
+
+<script>
+  const roles = ["Developer", "Photographer", "Editor", "Engineer", "Freelancer"];
+  let i = 0, char = 0;
+  const roleEl = document.getElementById("typed-role");
+
+  function typeRole() {
+    if (char <= roles[i].length) {
+      roleEl.textContent = roles[i].substring(0, char++);
+      setTimeout(typeRole, 120);
+    } else {
+      setTimeout(() => eraseRole(), 1000);
+    }
+  }
+
+  function eraseRole() {
+    if (char >= 0) {
+      roleEl.textContent = roles[i].substring(0, char--);
+      setTimeout(eraseRole, 60);
+    } else {
+      i = (i + 1) % roles.length;
+      setTimeout(typeRole, 400);
+    }
+  }
+
+  typeRole();
+
+  document.querySelector('.contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+    alert("Message sent! Thank you for reaching out.");
+    e.target.reset();
+  });
+
+  function toggleTheme() {
+    document.body.classList.toggle('light');
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('backToTop');
+    btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+  });
+
+  function animateCounter(id, end, duration) {
+    let start = 0;
+    const step = Math.ceil(duration / end);
+    const el = document.getElementById(id);
+    const counter = setInterval(() => {
+      start++;
+      el.textContent = start;
+      if (start >= end) clearInterval(counter);
+    }, step);
+  }
+
+  window.addEventListener('load', () => {
+    animateCounter("projectsCount", 12, 800);
+    animateCounter("clientsCount", 8, 800);
+    animateCounter("yearsCount", 3, 800);
+  });
+
+  // Particles
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const particles = Array.from({length: 100}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2,
+    dx: Math.random() * 0.5,
+    dy: Math.random() * 0.5
+  }));
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.2)';
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x > canvas.width || p.x < 0) p.dx *= -1;
+      if (p.y > canvas.height || p.y < 0) p.dy *= -1;
+    }
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+</script>
+</body>
+</html>
